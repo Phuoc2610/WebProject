@@ -3,7 +3,9 @@
 namespace App\Controller;
 
 use App\Entity\Shoes;
+use App\Form\ShoesCreateType;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
@@ -51,4 +53,41 @@ class ShoesController extends AbstractController
 
         return $this->redirectToRoute("shoes_list");
     }
+    /**
+     * @Route("/shoes/create", name="shoes_create", methods={"GET","POST"})
+     */
+    public function createAction(Request $request)
+    {
+        $shoes = new shoes();
+        $form = $this->createForm(ShoesCreateType::class, $shoes);
+
+        if ($this->saveChanges($form, $request, $shoes)) {
+            $this->addFlash(
+                'notice',
+                'Shoes add success'
+            );
+
+            return $this->redirectToRoute("shoes_list");
+        }
+
+        return $this->render('shoes/create.html.twig', [
+            'form' => $form->createView()
+        ]);
+    }
+
+    public function saveChanges($form, $request, $shoes )
+    {
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+
+            $em = $this->getDoctrine()->getManager();
+            $em->persist($shoes);
+            $em->flush();
+
+            return true;
+        }
+        return false;
+    }
+
 }
