@@ -44,6 +44,11 @@ class Shoes
      */
     private $Supplier;
 
+    /**
+     * @ORM\Column(type="string", length=255)
+     */
+    private $Category;
+
     public function __construct()
     {
         $this->orders = new ArrayCollection();
@@ -125,6 +130,18 @@ class Shoes
     public function setSupplier(?Supplier $Supplier): self
     {
         $this->Supplier = $Supplier;
+
+        return $this;
+    }
+
+    public function getCategory(): ?string
+    {
+        return $this->Category;
+    }
+
+    public function setCategory(string $Category): self
+    {
+        $this->Category = $Category;
 
         return $this;
     }
