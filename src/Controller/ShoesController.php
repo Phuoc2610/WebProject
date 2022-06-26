@@ -21,4 +21,34 @@ class ShoesController extends AbstractController
             'shoes' => $shoes
         ]);
     }
+    /**
+     * @Route("/shoes/view/{id}", name="shoes_view")
+     */
+    public function viewAction($id)
+    {
+        $shoes = $this->getDoctrine()
+            ->getRepository(Shoes::class)
+            ->find($id);
+
+        return $this->render('shoes/view.html.twig', [
+            'shoes' => $shoes
+        ]);
+    }
+    /**
+     * @Route("/shoes/delete/{id}", name="shoes_delete")
+     */
+    public function deleteAction($id)
+    {
+        $em = $this->getDoctrine()->getManager();
+        $shoes = $em->getRepository(shoes::class)->find($id);
+        $em->remove($shoes);
+        $em->flush();
+
+        $this->addFlash(
+            'error',
+            'Shoes delete success'
+        );
+
+        return $this->redirectToRoute("shoes_list");
+    }
 }
