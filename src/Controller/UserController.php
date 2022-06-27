@@ -89,4 +89,26 @@ class UserController extends AbstractController
         }
         return false;
     }
+    /**
+     * @Route("/user/update/{id}", name="user_update")
+     */
+    public function updateAction($id, Request $request)
+    {
+        $em = $this->getDoctrine()->getManager();
+        $user = $em->getRepository(user::class)->find($id);
+
+        $form = $this->createForm(UserCreateType::class, $user);
+
+        if ($this->saveChanges($form, $request, $user)) {
+            $this->addFlash(
+                'notice',
+                'User update success'
+            );
+            return $this->redirectToRoute('user_list');
+        }
+
+        return $this->render('user/update.html.twig', [
+            'form' => $form->createView()
+        ]);
+    }
 }
