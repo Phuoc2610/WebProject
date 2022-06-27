@@ -3,7 +3,6 @@
 namespace App\Controller;
 
 use App\Entity\Supplier;
-use App\Form\SupplierAddType;
 use App\Form\SupplierCreateType;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;

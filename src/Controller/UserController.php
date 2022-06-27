@@ -3,6 +3,7 @@
 namespace App\Controller;
 
 use App\Entity\User;
+use App\Form\UserCreateType;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -51,5 +52,41 @@ class UserController extends AbstractController
         );
 
         return $this->redirectToRoute('user_list');
+    }
+    /**
+     * @Route("/user/create", name="user_create", methods={"GET","POST"})
+     */
+    public function createAction(Request $request)
+    {
+        $user = new user();
+        $form = $this->createForm(UserCreateType::class, $user);
+
+        if ($this->saveChanges($form, $request, $user)) {
+            $this->addFlash(
+                'notice',
+                'User Add success'
+            );
+
+            return $this->redirectToRoute('user_list');
+        }
+
+        return $this->render('user/create.html.twig', [
+            'form' => $form->createView()
+        ]);
+    }
+
+    public function saveChanges($form, $request, $user)
+    {
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+
+            $em = $this->getDoctrine()->getManager();
+            $em->persist($user);
+            $em->flush();
+
+            return true;
+        }
+        return false;
     }
 }
