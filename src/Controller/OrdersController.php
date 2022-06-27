@@ -24,4 +24,18 @@ class OrdersController extends AbstractController
         ]);
     }
 
+    /**
+     * @Route("/orders/view/{id}", name="orders_view")
+     */
+    public
+    function viewAction($id)
+    {
+        $orders = $this->getDoctrine()
+            ->getRepository(orders::class)
+            ->find($id);
+
+        return $this->render('orders/view.html.twig', [
+            'orders' => $orders
+        ]);
+    }
 }
