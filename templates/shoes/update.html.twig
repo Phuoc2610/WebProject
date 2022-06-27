@@ -1,0 +1,50 @@
+{% extends 'base.html.twig' %}
+{% block body %}
+    {{ form_start(form) }}
+    <div class="form-group">
+        <label for="name">Name:</label>
+        {{ form_widget(form.name,{
+            'attr':{
+                'class':'form-control',
+                'placeholder': 'Task name'
+            }
+        }) }}
+        <div class="invalid-feedback">
+            {{ form_errors(form.name) }}
+        </div>
+    </div>
+    <div class="form-group">
+        <label for="category">Inventory:</label>
+        {{ form_widget(form.inventory,{
+            'attr':{
+                'class':'form-control',
+                'placeholder': 'Inventory'
+            }
+        }) }}
+    </div>
+
+    <div class="form-group">
+        <label for="description">Category:</label>
+        {{ form_widget(form.category,{
+            'attr':{
+                'class':'form-control',
+                'placeholder': 'category name'
+            }
+        }) }}
+    </div>
+
+    <div class="form-group">
+    <label for="description">Price:</label>
+    {{ form_widget(form.price,{
+        'attr':{
+            'class':'form-control',
+            'placeholder': 'price'
+        }
+    }) }}
+
+
+
+
+    <input type="submit" name="Update_shoes" value="Update" class="btn btn-primary"/>
+    {{ form_end(form) }}
+{% endblock %}

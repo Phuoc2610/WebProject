@@ -89,5 +89,27 @@ class ShoesController extends AbstractController
         }
         return false;
     }
+    /**
+     * @Route("/shoes/update/{id}", name="shoes_update")
+     */
+    public function updateAction($id, Request $request)
+    {
+        $em = $this->getDoctrine()->getManager();
+        $shoes = $em->getRepository(Shoes::class)->find($id);
+
+        $form = $this->createForm(ShoesCreateType::class, $shoes);
+
+        if ($this->saveChanges($form, $request, $shoes)) {
+            $this->addFlash(
+                'notice',
+                'Shoes update success'
+            );
+            return $this->redirectToRoute('shoes_list');
+        }
+
+        return $this->render('shoes/update.html.twig', [
+            'form' => $form->createView()
+        ]);
+    }
 
 }
