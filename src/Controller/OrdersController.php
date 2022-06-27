@@ -23,7 +23,6 @@ class OrdersController extends AbstractController
             'orders' => $orders
         ]);
     }
-
     /**
      * @Route("/orders/view/{id}", name="orders_view")
      */
@@ -38,4 +37,22 @@ class OrdersController extends AbstractController
             'orders' => $orders
         ]);
     }
+/**
+ * @Route("/orders/delete/{id}", name="orders_delete")
+*/
+    public function deleteAction($id)
+    {
+        $em = $this->getDoctrine()->getManager();
+        $orders = $em->getRepository(orders::class)->find($id);
+        $em->remove($orders);
+        $em->flush();
+
+        $this->addFlash(
+            'error',
+            'Orders deleted'
+        );
+
+        return $this->redirectToRoute('Orders_list');
+
+}
 }
