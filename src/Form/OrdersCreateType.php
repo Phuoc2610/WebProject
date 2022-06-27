@@ -2,32 +2,32 @@
 
 namespace App\Form;
 
-use App\Entity\Supplier;
+use App\Entity\Orders;
+
 use Symfony\Component\Form\AbstractType;
-use Symfony\Component\Form\Extension\Core\Type\TelType;
+
+use Symfony\Component\Form\Extension\Core\Type\DateType;
 use Symfony\Component\Form\Extension\Core\Type\TextareaType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
-class SupplierCreateType extends AbstractType
+class OrdersCreateType extends AbstractType
 {
-    public function buildForm(FormBuilderInterface $builder, array $options)
+    public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         $builder
-            ->add('Name', TextType::class)
-            ->add('Address', TextType::class)
-            ->add('Phone', TelType::class);
+            ->add('Date', DateType::class, ['widget' => 'single_text'])
+            ->add('Quantity',TextType::class)
+            ->add('Total',TextareaType::class)
 
-
-
+        ;
     }
-
 
     public function configureOptions(OptionsResolver $resolver): void
     {
         $resolver->setDefaults([
-            'data_class' => supplier::class,
+            'data_class' => orders::class,
         ]);
     }
 }

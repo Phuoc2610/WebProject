@@ -2,32 +2,31 @@
 {% block body %}
     {{ form_start(form) }}
     <div class="form-group">
-        <label for="name">Name:</label>
-        {{ form_widget(form.Name,{
+        <label for="date">Date:</label>
+        {{ form_widget(form.Date,{
             'attr':{
                 'class':'form-control',
-                'placeholder': 'Name'
+                'placeholder': ' Date'
             }
         }) }}
-        <div class="invalid-feedback">
-            {{ form_errors(form.Name) }}
-        </div>
+    <div class="invalid-feedback">
+        {{ form_errors(form.Date) }}
     </div>
     <div class="form-group">
-        <label for="Address">Address:</label>
-        {{ form_widget(form.Address,{
+        <label for="Quantity">Quantity:</label>
+        {{ form_widget(form.Quantity,{
             'attr':{
                 'class':'form-control',
-                'placeholder': ' Address'
+                'placeholder': ' Quantity'
             }
         }) }}
     </div>
     <div class="form-group">
-        <label for="Phone">Phone:</label>
-        {{ form_widget(form.Phone,{
+        <label for="Total">Total:</label>
+        {{ form_widget(form.Total,{
             'attr':{
                 'class':'form-control',
-                'placeholder': 'phone'
+                'placeholder': 'Total'
             }
         }) }}
 

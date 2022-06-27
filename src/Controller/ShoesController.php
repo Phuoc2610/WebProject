@@ -102,7 +102,7 @@ class ShoesController extends AbstractController
         if ($this->saveChanges($form, $request, $shoes)) {
             $this->addFlash(
                 'notice',
-                'Shoes update success'
+                'Orders update success'
             );
             return $this->redirectToRoute('shoes_list');
         }
