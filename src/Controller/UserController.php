@@ -22,4 +22,17 @@ class UserController extends AbstractController
             'user' => $user
         ]);
     }
+    /**
+     * @Route("/user/view/{id}", name="user_view")
+     */
+    public function detailsAction($id)
+    {
+        $user = $this->getDoctrine()
+            ->getRepository(user::class)
+            ->find($id);
+
+        return $this->render('user/view.html.twig', [
+            'user' => $user
+        ]);
+    }
 }
