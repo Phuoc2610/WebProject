@@ -18,6 +18,7 @@
                 <td>{{ orders.Date|date('F j,Y, g:i a') }}</td>
                 <td>{{ orders.quantity }}</td>
                 <td>{{ orders.total }}</td>
+
                 <td>
                     <a href="{{ path('orders_view', {'id': orders.id}) }} " class='btn btn-success'>View</a>
 

@@ -39,7 +39,7 @@ class User
     private $Address;
 
     /**
-     * @ORM\OneToOne(targetEntity=Orders::class, mappedBy="User", cascade={"persist", "remove"})
+     * @ORM\OneToMany(targetEntity=Orders::class, mappedBy="User", cascade={"persist", "remove"})
      */
     private $orders;
 

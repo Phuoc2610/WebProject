@@ -35,7 +35,7 @@ class Orders
     private $Total;
 
     /**
-     * @ORM\OneToOne(targetEntity=User::class, inversedBy="orders", cascade={"persist", "remove"})
+     * @ORM\ManyToOne(targetEntity=User::class, inversedBy="orders", cascade={"persist", "remove"})
      */
     private $User;
 
