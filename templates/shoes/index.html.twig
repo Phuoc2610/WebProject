@@ -1,19 +1,39 @@
 {% extends 'base.html.twig' %}
 
 {% block body %}
-    <div class="bs-example" data-example-id="striped-table">
-        <table class="table table-striped">
-            <thead>
-            <tr>
-                <th>#</th>
-                <th>Shoes</th>
-                <th>Category</th>
-                <th>Inventory</th>
-                <th>Price</th>
-                <th></th>
-            </tr>
-            </thead>
-            <tbody>
+    <style>
+        body{
+            background-image: linear-gradient(0, rgba(0,0,0), rgba(0, 0, 0, 0.4)),
+            url({{ asset('img/shoes.jpg') }});
+            background-size: cover;
+            background-position: center;
+            background-attachment: fixed;
+            height: 680px;
+        }
+        .cart__content th{
+            text-align: center;
+            color: #ff6600;
+        }
+        .cart__content td{
+            text-align: center;
+        }
+        .cart__content .action{
+            width: 30%;
+        }
+
+    </style>
+    <section class="cart container">
+    <table class="table table-bordered cart__content table-dark ">
+    <thead>
+    <tr>
+        <th scope="col">#</th>
+        <th scope="col">Shoes</th>
+        <th scope="col">Category</th>
+        <th scope="col">Inventory</th>
+        <th scope="col">Price</th>
+    </tr>
+    </thead>
+        <tbody>
             {% for shoes in shoes %}
                 <tr>
                     <th scope="row">{{ shoes.id }}</th>
@@ -21,20 +41,15 @@
                     <td>{{ shoes.Category }}</td>
                     <td>{{ shoes.inventory }}</td>
                     <td>{{ shoes.price }}</td>
-                    <td>
+                    <td class=" action">
                         <a href="{{ path('shoes_view', {'id': shoes.id}) }} " class='btn btn-success'>View</a>
-                        <a href="{{ path('shoes_update', {'id': shoes.id}) }}" class='btn btn-default'>Update</a>
+                        <a href="{{ path('shoes_update', {'id': shoes.id}) }}" class='btn btn-info'>Update</a>
                         <a href="{{ path('shoes_delete', {'id': shoes.id}) }}" class='btn btn-danger'>Delete</a>
-
-
-
-
                     </td>
                 </tr>
             {% endfor %}
             </tbody>
         </table>
-    </div>
     <a href="{{ path('shoes_create') }}" class="btn btn-primary">Create new</a>
 
 {% endblock %}
