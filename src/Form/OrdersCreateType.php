@@ -4,6 +4,8 @@ namespace App\Form;
 
 use App\Entity\Orders;
 
+use Doctrine\ORM\Mapping\Entity;
+use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
 
 use Symfony\Component\Form\Extension\Core\Type\DateType;
@@ -20,6 +22,7 @@ class OrdersCreateType extends AbstractType
             ->add('Date', DateType::class, ['widget' => 'single_text'])
             ->add('Quantity',TextType::class)
             ->add('Total',TextareaType::class)
+            ->add('User')
 
         ;
     }

@@ -28,4 +28,5 @@ class UserCreateType extends AbstractType
             'data_class' => user::class,
         ]);
     }
+
 }

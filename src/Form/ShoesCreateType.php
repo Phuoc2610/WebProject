@@ -17,7 +17,8 @@ class ShoesCreateType extends AbstractType
             ->add('name', TextType::class)
             ->add('inventory', TextType::class)
             ->add('category', TextType::class)
-            ->add('price', TextareaType::class);
+            ->add('price', TextareaType::class)
+            ->add('Supplier');
 
     }
 
